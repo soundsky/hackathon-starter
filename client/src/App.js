@@ -5,6 +5,7 @@ import './App.css';
 import Axios from 'axios';
 
 // Components
+import PrivateRoute from './components/PrivateRoute';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 
