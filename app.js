@@ -17,10 +17,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
-const multer = require('multer');
-const cors = require('cors')
+// const multer = require('multer');
+const cors = require('cors');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+// const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -47,7 +47,7 @@ const app = express();
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
-}))
+}));
 /**
  * Connect to MongoDB.
  */
@@ -56,7 +56,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI);
-console.log('mongouri', process.env.MONGODB_URI)
+console.log('mongouri', process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
@@ -177,7 +177,7 @@ app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
 // app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-// app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+// app.post('/api/', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/here-maps', apiController.getHereMaps);
