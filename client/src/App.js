@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
 import './App.css';
 import Axios from 'axios';
+
+// Components
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 
@@ -19,11 +22,19 @@ function App() {
     }
     post()
   }, [])
+
   return (
-    <div className="App">
-      <SignupForm />
-      <LoginForm />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          {/* <PrivateRoute exact path='/protected' component={MainPage} /> */}
+          <Route path='/login' component={LoginForm} />
+          <Route component={LoginForm} />
+        </Switch>
+        {/* <SignupForm /> */}
+        {/* <LoginForm /> */}
+      </div>
+    </Router>
   );
 }
 
