@@ -10,19 +10,19 @@ import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 
 function App() {
-  useEffect(() => {
-    const post = async () => {
-      try {
-        const res = await Axios.post("/signup")
+  // useEffect(() => {
+  //   const post = async () => {
+  //     try {
+  //       const res = await Axios.post("/signup")
 
-        console.log('res.data', res.data)
+  //       console.log('res.data', res.data)
 
-      } catch (error) {
-        console.log('res.data error', error)
-      }
-    }
-    post()
-  }, [])
+  //     } catch (error) {
+  //       console.log('res.data error', error)
+  //     }
+  //   }
+  //   post()
+  // }, [])
 
   return (
     <Router>
