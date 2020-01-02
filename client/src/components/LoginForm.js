@@ -1,26 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
-
-const LoginForm = ({ status }) => {
-    const [users, setUsers] = useState([]);
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
-    useEffect(() => {
-        console.log("Status has changed!", status);
-        status && setUsers(users => [...users, status])
-    }, [status]);
+const LoginForm = () => {
+    // Set initial state for credentials and fetch check
+    const [credentials, setCredentials] = useState({
+        email: "",
+        password: ""
+    })
+    const [isFetching, setIsFetching] = useState(false);
+
+    // Sets credentials to it's state
+    const handleChanges = event => {
+        setCredentials(
+            {...credentials, [event.target.name]: event.target.value}
+        )
+        console.log('New credentials from LoginForm', credentials);
+    }
+
+    // Post credentials to local storage token
+    const login = event => {
+        event.preventDefault();
+        setIsFetching(true);
+        axiosWithAuth()
+            .post('/login', credentials)
+            .then(response => {
+                localStorage.setItem('token', response.data.payload);
+            })
+            .catch(error => console.log(error));
+    }
+
 
     return (
         <div>
-            <form>
-                <label>
-                    Email:
-                    <input type="email" />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" />
-                </label>
+            <form onSubmit={login}>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={credentials.email}
+                    onChange={handleChanges}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={credentials.password}
+                    onChange={handleChanges}
+                />
+                <button>Log in</button>
+                {isFetching && 'Logging in...'}
             </form>
         </div>
     )
