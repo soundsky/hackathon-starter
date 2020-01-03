@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -14,15 +14,18 @@ const PlaylistsView = props => {
     });
 
     // GET song data
-    const getData = () => {
-        axiosWithAuth()
-            .get('/playlist')
-            .then(res => {
-                console.log(res.data);
-                setSongInfo({ songInfo: res.data })
-            })
-            .catch(err => console.log(err));
-    };
+    useEffect(() => {
+        const getData = () => {
+            axiosWithAuth()
+                .get('/playlist')
+                .then(res => {
+                    console.log(res.data);
+                    setSongInfo({ songInfo: res.data })
+                })
+                .catch(err => console.log(err));
+        }
+        getData();
+    }, [])
 
     return (
         <div>
