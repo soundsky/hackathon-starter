@@ -4,7 +4,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const TracksView = (props) => {
     const [tracks, setTracks] = useState([]);
-    const [list, setList] = useState({ playlist: "" });
+    const [list, setList] = useState([]);
 
     useEffect(() => {
         axiosWithAuth()
@@ -28,7 +28,7 @@ const TracksView = (props) => {
         axiosWithAuth()
             .post('/postSong', {id})
             .then(res => {
-                setList({ playlist: res.data });
+                setList(res.data);
                 console.log(res.data);
             })
             .catch(err => console.log(err));
