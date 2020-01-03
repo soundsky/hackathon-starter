@@ -14,6 +14,13 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * GET /login
  * Login page.
  */
+exports.playlist = (req,res, next) => {
+  console.log('req.userID', req.userID)
+
+  return res.json({user: req.userID})
+
+}
+
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect('/');
@@ -60,7 +67,7 @@ exports.postLogin = (req, res, next) => {
         iat: moment().unix(),
         sub: user._id
       }
-      
+
       const token = jwt.encode(payload, 'secret')
       return res.json({ token: token })
     });

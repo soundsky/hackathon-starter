@@ -10,6 +10,7 @@ const LoginForm = () => {
         password: ""
     })
     const [isFetching, setIsFetching] = useState(false);
+    const [error, setError] = useState("")
 
     // Sets credentials to it's state
     const handleChanges = event => {
@@ -27,8 +28,14 @@ const LoginForm = () => {
         axiosWithAuth()
             .post('/login', credentials)
             .then(response => {
-                console.log(response);
-                history.push('/playlists');
+                console.log(response.data);
+                if (response.data.token) {
+                    localStorage.setItem("token", response.data.token);
+                    history.push('/playlists');
+                } else {
+                    setError(response.data.msg)
+                }
+
             })
             .catch(error => console.log(error));
     }
@@ -56,6 +63,7 @@ const LoginForm = () => {
                 <button>Log in</button>
                 {isFetching && 'Logging in...'}
             </form>
+            <p>{error ? error : null}</p>
         </div>
     )
 }

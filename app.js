@@ -19,6 +19,7 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 // const multer = require('multer');
 const cors = require('cors');
+const authMW = require('./middlware/authMW')
 
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -32,6 +33,7 @@ dotenv.config({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const trackController = require('./controllers/track')
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -132,6 +134,8 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/tracks',authMW, trackController.getTracks)
+app.get('/playlist', authMW, userController.playlist)
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);

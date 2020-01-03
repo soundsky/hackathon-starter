@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const PlaylistsView = props => {
-    // Setting dummy data for song information
+    // Setting state for song information and playlist
+    const [playlist, setPlaylist] = useState([]);
     const [songInfo, setSongInfo] = useState({
-        title: "",
+        track: "",
         artist: "",
-        album: "",
         duration: "",
-        genre: "",
-        id: Date.now()
+        _id: ""
     });
 
     // GET song data
@@ -19,14 +18,16 @@ const PlaylistsView = props => {
             .get('/playlist')
             .then(res => {
                 console.log(res.data);
-                setSongInfo({ songInfo: res.data })
+                // setPlaylist(res.data);
             })
             .catch(err => console.log(err));
     }, [])
 
+    console.log(songInfo);
+
     return (
         <div>
-            {songInfo.map(song => (
+            {playlist.map(song => (
                 <p key={song.id}>
                 Song Title: {song.title} | 
                 Artist: {song.artist} | 
