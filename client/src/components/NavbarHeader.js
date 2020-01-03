@@ -15,7 +15,10 @@ export default function NavbarHeader() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/home">Home</Nav.Link>
+                    <Nav.Link href="/tracks">Tracks</Nav.Link>
+                    <Nav.Link href="/playlists">Playlists</Nav.Link>
                     <Nav.Link href="/login">Log in</Nav.Link>
+                    <Nav.Link href="/signup">Sign up</Nav.Link>
                 </Nav>
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
