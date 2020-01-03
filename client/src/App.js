@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import Axios from 'axios';
 
 // Components
-import SignupForm from './components/SignupForm';
+// import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
+import NavbarHeader from './components/NavbarHeader';
 
 function App() {
   useEffect(() => {
@@ -27,12 +30,14 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+          <NavbarHeader />
           {/* <PrivateRoute exact path='/protected' component={MainPage} /> */}
           <Route path='/login' component={LoginForm} />
           <Route component={LoginForm} />
         </Switch>
         {/* <SignupForm /> */}
         {/* <LoginForm /> */}
+
       </div>
     </Router>
   );

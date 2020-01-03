@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 
 const LoginForm = ({ status }) => {
     const [users, setUsers] = useState({
@@ -45,22 +44,11 @@ const LoginForm = ({ status }) => {
                     onChange={handleChanges}
                     value={users.password}
                 />
-
             </form>
         </div>
     )
 }
 
-// handleSubmit(values, { setStatus, restForm }) {
-//     console.log("submitting", values);
-//     axios
-//         .post('/login', values)
-//         .then(res => {
-//             console.log("success", res);
-//             setStatus(res.data);
-//             resetForm();
-//         })
-//         .catch(err => console.log(err.res));
-// }
+
 
 export default LoginForm;
