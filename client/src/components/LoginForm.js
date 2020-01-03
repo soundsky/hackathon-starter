@@ -43,6 +43,7 @@ const LoginForm = () => {
                     placeholder="Email"
                     value={credentials.email}
                     onChange={handleChanges}
+                    required
                 />
                 <input
                     type="password"
@@ -50,6 +51,7 @@ const LoginForm = () => {
                     placeholder="Password"
                     value={credentials.password}
                     onChange={handleChanges}
+                    required
                 />
                 <button>Log in</button>
                 {isFetching && 'Logging in...'}
