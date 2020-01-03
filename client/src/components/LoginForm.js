@@ -1,29 +1,6 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-
-const LoginForm = ({ status }) => {
-    const [users, setUsers] = useState({
-        email: "",
-        password: ""
-    });
-
-    const handleChanges = event => {
-        setUsers({ ...users, [event.target.email]: event.trget.value });
-    };
-
-    const submitForm = event => {
-        event.preventDefault();
-
-        status(users);
-
-        setUsers({ email: "", password: "" });
-    };
-    console.log("user state", users);
-=======
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
->>>>>>> df7dcdacdb2c63274ca2ce7ad74ce60513957c9f
 
 const LoginForm = () => {
     // Set initial state for credentials and fetch check
@@ -56,25 +33,6 @@ const LoginForm = () => {
 
     return (
         <div>
-<<<<<<< HEAD
-            <form onSubmit={submitForm}>
-                <label htmlFor="name">Email:</label>
-                <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    onChange={handleChanges}
-                    value={users.email}
-                />
-                <label htmlFor="name">Password:</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    onChange={handleChanges}
-                    value={users.password}
-                />
-=======
             <form onSubmit={login}>
                 <input
                     type="email"
@@ -92,7 +50,6 @@ const LoginForm = () => {
                 />
                 <button>Log in</button>
                 {isFetching && 'Logging in...'}
->>>>>>> df7dcdacdb2c63274ca2ce7ad74ce60513957c9f
             </form>
         </div>
     )
