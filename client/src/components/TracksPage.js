@@ -26,7 +26,7 @@ const TracksView = (props) => {
     const postSong = id => {
         // e.preventDefault();
         axiosWithAuth()
-            .post('/postSong', id)
+            .post('/postSong', {id})
             .then(res => {
                 setList({ playlist: res.data });
                 console.log(res.data);

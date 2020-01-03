@@ -25,9 +25,10 @@ const authMW = (req, res, next) => {
     }
 
     const user = payload.sub
-
+    console.log('uzer', user)
     if (user) {
-        req.userID = payload.id
+        console.log('payload.id', user )
+        req.userID = user
         return next()
     }
 

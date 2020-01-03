@@ -135,6 +135,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
  */
 app.get('/', homeController.index);
 app.get('/tracks',authMW, trackController.getTracks)
+app.post('/postSong', authMW, trackController.postSong)
 app.get('/playlist', authMW, userController.playlist)
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
