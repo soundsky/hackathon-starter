@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, CardDeck, Card, Button } from 'react-bootstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const TracksView = (props) => {
-    const [tracks, setTracks] = useState([])
+    const [tracks, setTracks] = useState([]);
+    const [list, setList] = useState({playlist: ""});
+
     useEffect(() => {
         axiosWithAuth()
             .get('/tracks')
@@ -15,15 +17,38 @@ const TracksView = (props) => {
             })
             .catch(error => console.log(error));
     }, [])
+
+    const handleChanges = e => {
+        setList({ ...list, [e.target.name]: e.target.value });
+        console.log('list', list);
+    }
+
+    const postSong = e => {
+        e.preventDefault();
+        axiosWithAuth()
+            .post('/playSong', list)
+            .then(res => {
+                setList({playlist: res.data});
+                console.log(res.data);
+            })
+            .catch(err => console.log(err));
+    }
+
     return (
-        <ListGroup>
-            <ListGroup.Item>
-                {tracks.map((t) => 
-                    <ListGroup.Item>
-                        Track: {t.track} | Artist: {t.artist}
-                    </ListGroup.Item>)}
-            </ListGroup.Item>
-        </ListGroup>
+        <div>
+            <p>{list.track}</p>
+            {tracks.map((t) =>
+                <CardDeck>
+                    <Card key={t._id} inline style={{display: 'flex', flexDirection: 'row'}}>
+                        <Card.Body>
+                            <Card.Title>Track: {t.track}</Card.Title>
+                            <Card.Text>Artist: {t.artist}</Card.Text>
+                        </Card.Body>
+                        <Button onClick={postSong}>Add to playlist</Button>
+                    </Card>
+                </CardDeck>
+            )}
+        </div>
     )
 }
 

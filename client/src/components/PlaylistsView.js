@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+import TracksPage from './TracksPage';
+
 const PlaylistsView = props => {
     // Setting state for song information and playlist
     const [playlist, setPlaylist] = useState([]);
