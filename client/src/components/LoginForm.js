@@ -28,6 +28,7 @@ const LoginForm = () => {
             .post('/login', credentials)
             .then(response => {
                 console.log(response);
+                localStorage.setItem("token", response.data.payload);
                 history.push('/playlists');
             })
             .catch(error => console.log(error));
