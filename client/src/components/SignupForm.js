@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 
 const SignupForm = () => {
     // Set initial state for credentials and fetch check
@@ -16,17 +17,19 @@ const SignupForm = () => {
         setCredentials(
             { ...credentials, [event.target.name]: event.target.value }
         )
-        console.log('New credentials from LoginForm', credentials);
+        console.log('New credentials from SignupForm', credentials);
     }
 
     // Post credentials to local storage token
+    let history = useHistory();
     const signup = event => {
         event.preventDefault();
         setIsFetching(true);
         axiosWithAuth()
             .post('/signup', credentials)
             .then(response => {
-                localStorage.setItem('token', response.data.payload);
+                console.log(response);
+                history.push('/login');
             })
             .catch(error => console.log(error));
     }

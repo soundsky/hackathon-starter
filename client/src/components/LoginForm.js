@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 
 
 const LoginForm = () => {
@@ -19,13 +20,15 @@ const LoginForm = () => {
     }
 
     // Post credentials to local storage token
+    let history = useHistory();
     const login = event => {
         event.preventDefault();
         setIsFetching(true);
         axiosWithAuth()
             .post('/login', credentials)
             .then(response => {
-                localStorage.setItem('token', response.data.token);
+                console.log(response);
+                history.push('/playlists');
             })
             .catch(error => console.log(error));
     }
