@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ListGroup, CardDeck, Card, Button } from 'react-bootstrap';
+import { Table, CardDeck, Card, Button } from 'react-bootstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const TracksView = (props) => {
@@ -35,8 +35,25 @@ const TracksView = (props) => {
     }
 
     return (
-        <div>
-            <p>{list.track}</p>
+        <div className="playlist-cont">
+            {list.map((l) =>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            {/* <th>#</th> */}
+                            <th>Track</th>
+                            <th>Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {/* <td>1</td> */}
+                            <td>{l.track}</td>
+                            <td>{l.artist}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            )}
             {tracks.map((t) =>
                 <CardDeck>
                     <Card key={t._id} inline style={{ display: 'flex', flexDirection: 'row' }}>
