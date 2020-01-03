@@ -36,7 +36,6 @@ const TracksView = (props) => {
 
     return (
         <div className="playlist-cont">
-            {list.map((l) =>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -45,15 +44,16 @@ const TracksView = (props) => {
                             <th>Artist</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            {/* <td>1</td> */}
-                            <td>{l.track}</td>
-                            <td>{l.artist}</td>
-                        </tr>
-                    </tbody>
+                    {list.map((l) =>
+                        <tbody>
+                            <tr>
+                                {/* <td>1</td> */}
+                                <td>{l.track}</td>
+                                <td>{l.artist}</td>
+                            </tr>
+                        </tbody>
+                    )}
                 </Table>
-            )}
             {tracks.map((t) =>
                 <CardDeck>
                     <Card key={t._id} inline style={{ display: 'flex', flexDirection: 'row' }}>
