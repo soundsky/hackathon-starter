@@ -21,22 +21,18 @@ const SignupForm = () => {
     }
 
     // Post credentials to local storage token
+    let history = useHistory();
     const signup = event => {
         event.preventDefault();
         setIsFetching(true);
         axiosWithAuth()
             .post('/signup', credentials)
             .then(response => {
-                localStorage.setItem('token', response.data.payload);
+                console.log(response);
+                history.push('/login');
             })
             .catch(error => console.log(error));
     }
-
-    // Setting up useHistory to use on the signup button
-    let history = useHistory();
-    const handleClick = () => {
-        history.push('/login');
-    };
 
 
     return (
@@ -70,7 +66,7 @@ const SignupForm = () => {
                     value={credentials.password}
                     onChange={handleChanges}
                 />
-                <button onClick={handleClick}>Sign up</button>
+                <button>Sign up</button>
                 {isFetching && 'Signing up...'}
             </form>
         </div>
