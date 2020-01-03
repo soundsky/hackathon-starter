@@ -10,14 +10,15 @@ export default function NavbarHeader() {
     return (
         <div>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/">Soundsky</Navbar.Brand>
+                <Navbar.Brand href="/home">Soundsky</Navbar.Brand>
                 <FormGroup>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 </FormGroup>{' '}
 
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/home">Home</Nav.Link>
+                        <Nav.Link href="/tracks">Tracks</Nav.Link>
                         <Nav.Link href="/signup">Signup</Nav.Link>
                         <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
@@ -29,7 +30,6 @@ export default function NavbarHeader() {
                     <FormGroup>
                         <Button variant="outline-success">Search</Button>
                     </FormGroup>{' '}
-
                 </Form>
             </Navbar>
         </div>
