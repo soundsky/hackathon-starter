@@ -28,8 +28,8 @@ const SignupForm = () => {
         axiosWithAuth()
             .post('/signup', credentials)
             .then(response => {
-                console.log(response);
-                history.push('/login');
+                console.log(response.data);
+                response.data.authorized===true ? history.push('/login') : alert("This account has already been created.");
             })
             .catch(error => console.log(error));
     }
@@ -37,13 +37,14 @@ const SignupForm = () => {
 
     return (
         <div>
-            <form onSubmit={signup}>
+            <form name="signupForm" onSubmit={signup}>
                 <input
                     type="firstName"
                     name="firstName"
                     placeholder="First Name"
                     value={credentials.firstName}
                     onChange={handleChanges}
+                    required
                 />
                 <input
                     type="lastName"
@@ -51,6 +52,7 @@ const SignupForm = () => {
                     placeholder="Last Name"
                     value={credentials.lastName}
                     onChange={handleChanges}
+                    required
                 />
                 <input
                     type="email"
@@ -58,6 +60,7 @@ const SignupForm = () => {
                     placeholder="Email"
                     value={credentials.email}
                     onChange={handleChanges}
+                    required
                 />
                 <input
                     type="password"
@@ -65,6 +68,7 @@ const SignupForm = () => {
                     placeholder="Password"
                     value={credentials.password}
                     onChange={handleChanges}
+                    required
                 />
                 <button>Sign up</button>
                 {isFetching && 'Signing up...'}
