@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const TracksView = (props) => {
@@ -15,11 +16,14 @@ const TracksView = (props) => {
             .catch(error => console.log(error));
     }, [])
     return (
-        <div>
-            <ul>
-                {tracks.map((t) => <li>{t.track}</li>)}
-            </ul>
-        </div>
+        <ListGroup>
+            <ListGroup.Item>
+                {tracks.map((t) => 
+                    <ListGroup.Item>
+                        Track: {t.track} | Artist: {t.artist}
+                    </ListGroup.Item>)}
+            </ListGroup.Item>
+        </ListGroup>
     )
 }
 
