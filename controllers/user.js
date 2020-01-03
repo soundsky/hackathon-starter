@@ -6,7 +6,8 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
-
+const jwt = require("jwt-simple")
+const moment = require('moment')
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
@@ -51,6 +52,17 @@ exports.postLogin = (req, res, next) => {
       if (err) { return next(err); }
       // req.flash('success', { msg: 'Success! You are logged in.' });
       // res.redirect(req.session.returnTo || '/');
+      console.log('uzer', user)
+      const payload = {
+        exp: moment()
+          .add(14, "days")
+          .unix(),
+        iat: moment().unix(),
+        sub: user._id
+      }
+      
+      const token = jwt.encode(payload, 'secret')
+      return res.json({ token: token })
     });
   })(req, res, next);
 };
@@ -86,27 +98,30 @@ exports.getSignup = (req, res) => {
  * Create a new local account.
  */
 exports.postSignup = (req, res, next) => {
-  const validationErrors = [];
-  if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
-  if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' });
-  if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' });
+  // const validationErrors = [];
+  // if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
+  // if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' });
+  // if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' });
 
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/signup');
-  }
-  req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+  // if (validationErrors.length) {
+  //   req.flash('errors', validationErrors);
+  //   return res.redirect('/signup');
+  // }
+  // req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   const user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
   });
 
+  console.log('request.body.signup', req.body)
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/signup');
+      // req.flash('errors', { msg: 'Account with that email address already exists.' });
+      return res.json({ msg: 'Account with that email address already exists.', saved: false });
     }
     user.save((err) => {
       if (err) { return next(err); }
@@ -114,7 +129,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.json({ saved: true });
       });
     });
   });
