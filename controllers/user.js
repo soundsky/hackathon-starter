@@ -6,7 +6,8 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
-
+const jwt = require("jwt-simple")
+const moment = require('moment')
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
@@ -51,7 +52,17 @@ exports.postLogin = (req, res, next) => {
       if (err) { return next(err); }
       // req.flash('success', { msg: 'Success! You are logged in.' });
       // res.redirect(req.session.returnTo || '/');
-      return res.json({token: "token_value"})
+      console.log('uzer', user)
+      const payload = {
+        exp: moment()
+          .add(14, "days")
+          .unix(),
+        iat: moment().unix(),
+        sub: user._id
+      }
+      
+      const token = jwt.encode(payload, 'secret')
+      return res.json({ token: token })
     });
   })(req, res, next);
 };
@@ -118,7 +129,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.json({saved: true});
+        res.json({ saved: true });
       });
     });
   });
