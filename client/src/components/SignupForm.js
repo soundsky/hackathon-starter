@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 
 const SignupForm = () => {
     // Set initial state for credentials and fetch check
@@ -16,7 +17,7 @@ const SignupForm = () => {
         setCredentials(
             { ...credentials, [event.target.name]: event.target.value }
         )
-        console.log('New credentials from LoginForm', credentials);
+        console.log('New credentials from SignupForm', credentials);
     }
 
     // Post credentials to local storage token
@@ -30,6 +31,12 @@ const SignupForm = () => {
             })
             .catch(error => console.log(error));
     }
+
+    // Setting up useHistory to use on the signup button
+    let history = useHistory();
+    const handleClick = () => {
+        history.push('/login');
+    };
 
 
     return (
@@ -63,7 +70,7 @@ const SignupForm = () => {
                     value={credentials.password}
                     onChange={handleChanges}
                 />
-                <button>Sign up</button>
+                <button onClick={handleClick}>Sign up</button>
                 {isFetching && 'Signing up...'}
             </form>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 
 
 const LoginForm = () => {
@@ -30,6 +31,12 @@ const LoginForm = () => {
             .catch(error => console.log(error));
     }
 
+    // Setting up useHistory to use on the signup button
+    let history = useHistory();
+    const handleClick = () => {
+        history.push('/');
+    };
+
 
     return (
         <div>
@@ -48,7 +55,7 @@ const LoginForm = () => {
                     value={credentials.password}
                     onChange={handleChanges}
                 />
-                <button>Log in</button>
+                <button onClick={handleClick}>Log in</button>
                 {isFetching && 'Logging in...'}
             </form>
         </div>
