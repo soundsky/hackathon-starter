@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import Axios from 'axios';
-
+import TracksPage from './components/TracksPage'
 // Components
 import PrivateRoute from './components/PrivateRoute';
 import SignupForm from './components/SignupForm';
@@ -33,7 +33,7 @@ function App() {
     <Router>
       <div className="App">
         <NavbarHeader />
-
+        <TracksPage/>
         <Switch>
           {/* <Route path='/' component={HomePage} /> */}
           {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
