@@ -2,6 +2,12 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
+const trackSchema = new mongoose.Schema({
+  track: String,
+  artist: String,
+  length: String
+})
+
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   firstName: String,
@@ -11,15 +17,7 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   emailVerificationToken: String,
   emailVerified: Boolean,
-  snapchat: String,
-  facebook: String,
-  twitter: String,
-  google: String,
-  github: String,
-  instagram: String,
-  linkedin: String,
-  steam: String,
-  quickbooks: String,
+  tracks:[trackSchema],
   tokens: Array,
 
   profile: {
@@ -69,6 +67,8 @@ userSchema.methods.gravatar = function gravatar(size) {
   const md5 = crypto.createHash('md5').update(this.email).digest('hex');
   return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
+
+
 
 const User = mongoose.model('User', userSchema);
 

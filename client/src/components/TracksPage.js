@@ -4,7 +4,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const TracksView = (props) => {
     const [tracks, setTracks] = useState([]);
-    const [list, setList] = useState({playlist: ""});
+    const [list, setList] = useState({ playlist: "" });
 
     useEffect(() => {
         axiosWithAuth()
@@ -23,12 +23,12 @@ const TracksView = (props) => {
         console.log('list', list);
     }
 
-    const postSong = e => {
-        e.preventDefault();
+    const postSong = id => {
+        // e.preventDefault();
         axiosWithAuth()
-            .post('/playSong', list)
+            .post('/postSong', id)
             .then(res => {
-                setList({playlist: res.data});
+                setList({ playlist: res.data });
                 console.log(res.data);
             })
             .catch(err => console.log(err));
@@ -39,12 +39,12 @@ const TracksView = (props) => {
             <p>{list.track}</p>
             {tracks.map((t) =>
                 <CardDeck>
-                    <Card key={t._id} inline style={{display: 'flex', flexDirection: 'row'}}>
+                    <Card key={t._id} inline style={{ display: 'flex', flexDirection: 'row' }}>
                         <Card.Body>
                             <Card.Title>Track: {t.track}</Card.Title>
                             <Card.Text>Artist: {t.artist}</Card.Text>
                         </Card.Body>
-                        <Button onClick={postSong}>Add to playlist</Button>
+                        <Button onClick={() => { postSong(t._id) }}>Add to playlist</Button>
                     </Card>
                 </CardDeck>
             )}
