@@ -25,7 +25,7 @@ const LoginForm = () => {
         axiosWithAuth()
             .post('/login', credentials)
             .then(response => {
-                localStorage.setItem('token', response.data.payload);
+                localStorage.setItem('token', response.data.token);
             })
             .catch(error => console.log(error));
     }

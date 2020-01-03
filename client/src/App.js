@@ -30,7 +30,7 @@ function App() {
         <Switch>
           {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
           <Route path='/login' component={LoginForm} />
-          <Route component={LoginForm} />
+          {/* <Route component={LoginForm} /> */}
           <Route path='/signup' component={SignupForm} />
         </Switch>
         {/* <SignupForm /> */}
