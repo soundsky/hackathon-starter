@@ -1,4 +1,4 @@
-const jwt = require('jwt')
+const jwt = require('jwt-simple')
 const moment = require('moment')
 
 
@@ -14,9 +14,17 @@ const authMW = (req, res, next) => {
     const now = moment().unix();
     // check if the token has expired
     if (now > payload.exp) {
-        callback("Token has expired.")
+        return res.json({ author })
     }
 
+    const user = payload.sub
+
+    if (user) {
+        req.userID = payload.id
+        return next()
+    }
+
+    return res.json({ msg: "Please log in", authorized: false })
 }
 
 
