@@ -15,16 +15,13 @@ const PlaylistsView = props => {
 
     // GET song data
     useEffect(() => {
-        const getData = () => {
-            axiosWithAuth()
-                .get('/playlist')
-                .then(res => {
-                    console.log(res.data);
-                    setSongInfo({ songInfo: res.data })
-                })
-                .catch(err => console.log(err));
-        }
-        getData();
+        axiosWithAuth()
+            .get('/playlist')
+            .then(res => {
+                console.log(res.data);
+                setSongInfo({ songInfo: res.data })
+            })
+            .catch(err => console.log(err));
     }, [])
 
     return (
