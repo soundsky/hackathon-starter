@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -14,7 +14,7 @@ const PlaylistsView = props => {
     });
 
     // GET song data
-    const getData = () => {
+    useEffect(() => {
         axiosWithAuth()
             .get('/playlist')
             .then(res => {
@@ -22,7 +22,7 @@ const PlaylistsView = props => {
                 setSongInfo({ songInfo: res.data })
             })
             .catch(err => console.log(err));
-    };
+    }, [])
 
     return (
         <div>

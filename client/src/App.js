@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import Axios from 'axios';
@@ -8,6 +10,7 @@ import Axios from 'axios';
 import PrivateRoute from './components/PrivateRoute';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
+import NavbarHeader from './components/NavbarHeader';
 
 function App() {
   // useEffect(() => {
@@ -27,14 +30,19 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <NavbarHeader />
+        {/* <Route exact path="/" component={Home} />
+        <Route path="/signup" component={SignupForm} />
+        <Route path="/login" component={LoginForm} /> */}
         <Switch>
           {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
           <Route path='/login' component={LoginForm} />
-          <Route component={LoginForm} />
+          {/* <Route component={LoginForm} /> */}
           <Route path='/signup' component={SignupForm} />
         </Switch>
         {/* <SignupForm /> */}
         {/* <LoginForm /> */}
+
       </div>
     </Router>
   );

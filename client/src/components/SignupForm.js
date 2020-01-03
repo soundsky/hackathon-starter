@@ -14,7 +14,7 @@ const SignupForm = () => {
     // Sets credentials to it's state
     const handleChanges = event => {
         setCredentials(
-            {...credentials, [event.target.name]: event.target.value}
+            { ...credentials, [event.target.name]: event.target.value }
         )
         console.log('New credentials from LoginForm', credentials);
     }
