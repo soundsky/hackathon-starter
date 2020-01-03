@@ -11,6 +11,8 @@ import PrivateRoute from './components/PrivateRoute';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import NavbarHeader from './components/NavbarHeader';
+import PlaylistsView from './components/PlaylistsView';
+import HomePage from './components/HomePage';
 
 function App() {
   // useEffect(() => {
@@ -31,18 +33,14 @@ function App() {
     <Router>
       <div className="App">
         <NavbarHeader />
-        {/* <Route exact path="/" component={Home} />
-        <Route path="/signup" component={SignupForm} />
-        <Route path="/login" component={LoginForm} /> */}
+
         <Switch>
+          {/* <Route path='/' component={HomePage} /> */}
           {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
           <Route path='/login' component={LoginForm} />
-          {/* <Route component={LoginForm} /> */}
+          <Route path='/playlists' component={PlaylistsView} />
           <Route path='/signup' component={SignupForm} />
         </Switch>
-        {/* <SignupForm /> */}
-        {/* <LoginForm /> */}
-
       </div>
     </Router>
   );
