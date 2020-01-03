@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, CardImg } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardImg, Button } from 'react-bootstrap';
 import { CardTitle, CardImgOverlay } from 'reactstrap';
 
 const HomePage = () => {
@@ -22,6 +22,11 @@ const HomePage = () => {
                 </Col>
                 <Col xs="8">
                     <h1>Welcome to Soundsky</h1>
+                    <br />
+                    <Button href="/login" variant="secondary" inverse style={{width:"30%"}}>Log in</Button>
+                    <br />
+                    <br />
+                    <Button href="/signup" variant="secondary" inverse style={{width:"30%"}}>Sign up</Button>
                 </Col>
             </Row>
         </Container>
