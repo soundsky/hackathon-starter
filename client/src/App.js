@@ -28,9 +28,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          {/* <PrivateRoute exact path='/protected' component={MainPage} /> */}
+          {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
           <Route path='/login' component={LoginForm} />
           <Route component={LoginForm} />
+          <Route path='/signup' component={SignupForm} />
         </Switch>
         {/* <SignupForm /> */}
         {/* <LoginForm /> */}
