@@ -18,7 +18,7 @@ const PlaylistsView = props => {
             .get('/playlist')
             .then(res => {
                 console.log(res.data);
-                setPlaylist(res.data);
+                // setPlaylist(res.data);
             })
             .catch(err => console.log(err));
     }, [])

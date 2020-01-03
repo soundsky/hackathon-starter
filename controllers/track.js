@@ -7,5 +7,5 @@ exports.getTracks = async (req, res, next) => {
         // tracks = l
     
     console.log(tracks)
-    return res.json(tracks)
+    return res.json({tracks, authorized: true})
 }
