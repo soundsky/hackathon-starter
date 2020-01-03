@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-<<<<<<< HEAD
-// const SignupForm = ({ status }) => {
-//     const [users, setUsers] = useState([]);
-=======
 const SignupForm = () => {
     // Set initial state for credentials and fetch check
     const [credentials, setCredentials] = useState({
@@ -14,12 +10,11 @@ const SignupForm = () => {
         password: ""
     })
     const [isFetching, setIsFetching] = useState(false);
->>>>>>> df7dcdacdb2c63274ca2ce7ad74ce60513957c9f
 
     // Sets credentials to it's state
     const handleChanges = event => {
         setCredentials(
-            {...credentials, [event.target.name]: event.target.value}
+            { ...credentials, [event.target.name]: event.target.value }
         )
         console.log('New credentials from LoginForm', credentials);
     }
@@ -36,32 +31,6 @@ const SignupForm = () => {
             .catch(error => console.log(error));
     }
 
-<<<<<<< HEAD
-//     useEffect(() => {
-//         console.log("Status has changed!", status);
-//         status && setUsers(users => [...users, status])
-//     }, [status]);
-
-//     return (
-//         <div>
-//             <form>
-//                 <label>
-//                     Email:
-//                     <input type="email" />
-//                 </label>
-//                 <label>
-//                     Password:
-//                     <input type="password" />
-//                 </label>
-//                 <label>
-//                     Confirm Password:
-//                     <input type="password" />
-//                 </label>
-//             </form>
-//         </div>
-//     )
-// }
-=======
 
     return (
         <div>
@@ -100,6 +69,5 @@ const SignupForm = () => {
         </div>
     )
 }
->>>>>>> df7dcdacdb2c63274ca2ce7ad74ce60513957c9f
 
 export default SignupForm;
