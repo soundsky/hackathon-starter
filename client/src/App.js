@@ -35,7 +35,7 @@ function App() {
         <NavbarHeader />
         {/* <TracksPage/> */}
         <Switch>
-          <Route path='/home' component={HomePage} />
+          <Route exact path='/' component={HomePage} />
           <Route path='/tracks' component={TracksPage} />
           {/* <PrivateRoute exact path='/protected' component={PlaylistsView} /> */}
           <Route path='/login' component={LoginForm} />

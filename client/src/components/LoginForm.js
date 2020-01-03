@@ -31,7 +31,7 @@ const LoginForm = () => {
                 console.log(response.data);
                 if (response.data.token) {
                     localStorage.setItem("token", response.data.token);
-                    history.push('/home');
+                    history.push('/tracks');
                 } else {
                     setError(response.data.msg)
                 }
